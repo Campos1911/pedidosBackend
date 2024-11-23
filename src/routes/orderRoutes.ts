@@ -2,6 +2,7 @@ import { FastifyInstance, FastifyReply, FastifyRequest } from "fastify";
 import { OrderModel } from "../models/orderModel";
 import {
   createOrderController,
+  deleteOrderController,
   editOrderController,
   getOrderController,
 } from "../controllers/Order";
@@ -31,6 +32,16 @@ export default async function orderRoutes(app: FastifyInstance) {
       reply: FastifyReply
     ) => {
       return new editOrderController().execute(req, reply);
+    }
+  );
+
+  app.delete(
+    "/delete/order/:orderId",
+    async (
+      req: FastifyRequest<{ Params: { orderId: string } }>,
+      reply: FastifyReply
+    ) => {
+      return new deleteOrderController().execute(req, reply);
     }
   );
 }
