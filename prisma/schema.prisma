@@ -14,10 +14,11 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
-  email    String @unique
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  email    String   @unique
   password String
   name     String
+  orderId  String[]
 }
 
 model Food {
@@ -30,7 +31,7 @@ model Food {
 model Order {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   foodId    String[]
-  userId    String
+  userId    String   @db.ObjectId
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
